@@ -1020,7 +1020,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001363
-      electron-to-chromium: 1.4.182
+      electron-to-chromium: 1.4.183
       node-releases: 2.0.5
       update-browserslist-db: 1.0.4_browserslist@4.21.1
     dev: true
@@ -1672,8 +1672,8 @@ packages:
       type-fest: 2.16.0
     dev: false
 
-  /electron-to-chromium/1.4.182:
-    resolution: {integrity: sha512-OpEjTADzGoXABjqobGhpy0D2YsTncAax7IkER68ycc4adaq0dqEG9//9aenKPy7BGA90bqQdLac0dPp6uMkcSg==}
+  /electron-to-chromium/1.4.183:
+    resolution: {integrity: sha512-PnJvlREshGPh3M5tgReLgqbOQ61yd4Knwo39Cxy9SMfqwX9q5iRy+JioQC1LyKx1IBAH2zoctAWblhgM2kbEKQ==}
     dev: true
 
   /electron-updater/5.0.5:
