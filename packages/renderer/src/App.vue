@@ -1,51 +1,115 @@
 <script lang="ts" setup>
-    import ReactiveCounter from '/@/components/ReactiveCounter.vue'
-    import ReactiveHash from '/@/components/ReactiveHash.vue'
-    import ElectronVersions from '/@/components/ElectronVersions.vue'
+    import { ref, onMounted } from 'vue'
+    import defaultConfig from '/@/components/defaultConfig.vue'
+
+    // eslint-disable-next-line no-undef
+    const defaultData = ref<App.Config>({
+        printerUrl: '',
+        printerPort: '',
+        printerModel: '',
+    })
+
+    const printerUrl = ref('')
+
+    const printerPort = ref('')
+
+    const printerModel = ref('')
+
+    onMounted(() => {
+        getData()
+    })
+
+    function submit() {
+        window.api.setCoreData({
+            printerUrl: printerUrl.value,
+            printerPort: printerPort.value,
+            printerModel: printerModel.value,
+        })
+
+        getData()
+    }
+
+    function getData() {
+        const data = window.api.getCoreData()
+
+        defaultData.value = data
+
+        printerUrl.value = data.printerUrl
+        printerPort.value = data.printerPort
+        printerModel.value = data.printerModel
+    }
 </script>
 
 <template>
-    <img alt="Vue logo" src="../assets/logo.svg" width="150" />
+    <div class="my-3 mx-4">
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-1/2 px-4">
+                <div class="shadow overflow-hidden sm:rounded-md">
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <div class="grid grid-cols-6 gap-6">
+                            <div class="col-span-6">
+                                <label for="printer-url" class="block text-sm font-medium text-gray-700">Printer URL</label>
 
-    <p>
-        For a guide and recipes on how to configure / customize this project,<br />
-        check out the
-        <a href="https://github.com/cawa-93/vite-electron-builder" target="_blank">vite-electron-builder documentation</a>.
-    </p>
+                                <input
+                                    id="printer-url"
+                                    v-model="printerUrl"
+                                    type="text"
+                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
 
-    <fieldset>
-        <legend>Test Vue Reactivity</legend>
-        <reactive-counter />
-    </fieldset>
+                            <div class="col-span-6">
+                                <label for="printer-port" class="block text-sm font-medium text-gray-700">Printer Port</label>
 
-    <fieldset>
-        <legend>Test Node.js API</legend>
-        <reactive-hash />
-    </fieldset>
+                                <input
+                                    id="printer-port"
+                                    v-model="printerPort"
+                                    type="number"
+                                    min="0"
+                                    max="65535"
+                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
 
-    <fieldset>
-        <legend>Environment</legend>
-        <electron-versions />
-    </fieldset>
+                            <div class="col-span-6">
+                                <label for="printer-model" class="block text-sm font-medium text-gray-700">Printer Model</label>
 
-    <p>
-        Edit
-        <code>packages/renderer/src/App.vue</code> to test hot module replacement.
-    </p>
+                                <select
+                                    id="printer-model"
+                                    v-model="printerModel"
+                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                >
+                                    <option value="EPSON">EPSON</option>
+
+                                    <option value="STAR">STAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between px-4 py-3 bg-gray-50 sm:px-6">
+                        <button
+                            type="button"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            @click="getData"
+                        >
+                            Reload
+                        </button>
+
+                        <button
+                            type="button"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            @click="submit"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 px-4">
+                <default-config :printer-url="defaultData?.printerUrl" :printer-port="defaultData?.printerPort" :printer-model="defaultData?.printerModel" />
+            </div>
+        </div>
+    </div>
 </template>
-
-<style>
-    #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin: 60px auto;
-        max-width: 700px;
-    }
-    fieldset {
-        margin: 2rem;
-        padding: 1rem;
-    }
-</style>

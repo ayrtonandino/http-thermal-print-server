@@ -1,6 +1,12 @@
-/**
- * @module preload
- */
+import { contextBridge } from 'electron'
+import { api } from './api'
 
-export { sha256sum } from './nodeCrypto'
-export { versions } from './versions'
+if (process.contextIsolated) {
+    try {
+        contextBridge.exposeInMainWorld('api', api)
+    } catch (error) {
+        console.error(error)
+    }
+} else {
+    window.api = api
+}

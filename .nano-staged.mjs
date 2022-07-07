@@ -8,14 +8,14 @@ export default {
      * @param {string[]} filenames
      * @return {string[]}
      */
-    'packages/**/{*.ts,*.vue,tsconfig.json}': ({ filenames }) => {
-        const pathToPackages = resolve(process.cwd(), 'packages') + sep
-        return Array.from(
-            filenames.reduce((set, filename) => {
-                const pack = filename.replace(pathToPackages, '').split(sep)[0]
-                set.add(`pnpm run typecheck:${pack} --if-present`)
-                return set
-            }, new Set())
-        )
-    },
+    // 'packages/**/{*.ts,*.vue,tsconfig.json}': ({ filenames }) => {
+    //     const pathToPackages = resolve(process.cwd(), 'packages') + sep
+    //     return Array.from(
+    //         filenames.reduce((set, filename) => {
+    //             const pack = filename.replace(pathToPackages, '').split(sep)[0]
+    //             set.add(`pnpm run typecheck:${pack} --if-present`)
+    //             return set
+    //         }, new Set())
+    //     )
+    // },
 }
