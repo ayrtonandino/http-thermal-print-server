@@ -2,15 +2,15 @@
     defineProps({
         printerUrl: {
             type: String,
-            default: '',
+            default: null,
         },
         printerPort: {
-            type: String,
-            default: '',
+            type: [Number, String],
+            default: null,
         },
         printerModel: {
             type: String,
-            default: '',
+            default: null,
         },
     })
 </script>
