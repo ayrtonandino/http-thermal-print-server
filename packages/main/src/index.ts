@@ -24,11 +24,11 @@ app.disableHardwareAcceleration()
 /**
  * Shout down background process if all windows was closed
  */
-// app.on('window-all-closed', () => {
-//     if (process.platform !== 'darwin') {
-//         app.quit()
-//     }
-// })
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+})
 
 /**
  * @see https://www.electronjs.org/docs/v14-x-y/api/app#event-activate-macos Event: 'activate'
