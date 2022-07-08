@@ -24,19 +24,19 @@
         <div class="border-t border-gray-200">
             <dl>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Printer URL</dt>
+                    <dt class="text-sm font-medium">Printer URL</dt>
 
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ printerUrl }}</dd>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Printer Port</dt>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium">Printer Port</dt>
 
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ printerPort }}</dd>
                 </div>
 
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Printer Model</dt>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium">Printer Model</dt>
 
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ printerModel }}</dd>
                 </div>
