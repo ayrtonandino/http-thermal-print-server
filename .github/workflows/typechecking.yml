@@ -32,11 +32,8 @@ jobs:
                   node-version: 18 # Need for pnpm >=7.7
                   cache: 'npm'
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
 
             # TODO: Install not all dependencies, but only those required for this workflow
             - name: Install dependencies

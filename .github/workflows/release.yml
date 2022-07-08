@@ -36,11 +36,8 @@ jobs:
                   node-version: 18
 
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
 
             - name: Get last git tag
               id: tag
@@ -102,11 +99,8 @@ jobs:
                   cache: 'npm'
 
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
 
             - name: Install dependencies
               run: pnpm install

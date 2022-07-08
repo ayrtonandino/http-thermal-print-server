@@ -29,11 +29,8 @@ jobs:
                   node-version: 18
                   cache: 'npm'
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
             - run: pnpm install
             - run: pnpm run test:main
 
@@ -46,11 +43,8 @@ jobs:
                   node-version: 18
                   cache: 'npm'
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
             - run: pnpm install
             - run: pnpm run test:preload
 
@@ -63,11 +57,8 @@ jobs:
                   node-version: 18
                   cache: 'npm'
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
             - run: pnpm install
             - run: pnpm run test:renderer
 
@@ -84,11 +75,8 @@ jobs:
                   node-version: 18
                   cache: 'npm'
             - uses: pnpm/action-setup@v2.0.1
-              name: Install pnpm
-              id: pnpm-install
               with:
                   version: 7
-                  run_install: false
             - run: pnpm install
             - run: pnpx playwright install --with-deps
             - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- pnpm run test:e2e
