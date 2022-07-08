@@ -9,8 +9,8 @@
 </script>
 
 <template>
-    <nav class="bg-gray-800">
-        <header class="mx-auto px-4">
+    <header class="bg-gray-800">
+        <nav class="mx-auto px-4">
             <div class="flex h-10 items-center justify-between">
                 <div class="flex items-center">
                     <img :src="favicon" class="mr-3 h-6 w-6" name="ANDROMEDA" alt="ANDROMEDA" />
@@ -24,6 +24,6 @@
                     </svg>
                 </button>
             </div>
-        </header>
-    </nav>
+        </nav>
+    </header>
 </template>

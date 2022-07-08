@@ -4,6 +4,9 @@ import './security-restrictions'
 import { restoreOrCreateWindow } from '/@/mainWindow'
 import { createTray } from '/@/createTray'
 import { startServer } from '/@/server'
+import path from 'path'
+
+const exeName = path.basename(process.execPath)
 
 let mainWindow: BrowserWindow | null = null
 
@@ -26,6 +29,8 @@ app.disableHardwareAcceleration()
 
 app.setLoginItemSettings({
     openAtLogin: true,
+    path: exeName,
+    args: ['--processStart', `"${exeName}"`, '--process-start-args', `"--hidden"`],
 })
 
 /**
