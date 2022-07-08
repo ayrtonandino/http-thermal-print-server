@@ -1,15 +1,14 @@
 {
     "name": "vite-electron-builder",
     "description": "Secure boilerplate for Electron app based on Vite",
+    "version": "0.1.0",
     "private": true,
     "engines": {
         "node": ">=v16.13",
         "pnpm": ">=7.1"
     },
     "author": {
-        "email": "kozackunisoft@gmail.com",
-        "name": "Alex Kozack",
-        "url": "https://kozack.me"
+        "name": "Ayrton Andino"
     },
     "main": "packages/main/dist/index.cjs",
     "scripts": {
@@ -34,6 +33,7 @@
         "postinstall": "cross-env ELECTRON_RUN_AS_NODE=1 pnpx electron ./scripts/update-electron-vendors.js "
     },
     "dependencies": {
+        "axios": "^0.27.2",
         "body-parser": "^1.20.0",
         "cors": "^2.8.5",
         "electron-store": "^8.0.2",
@@ -42,6 +42,7 @@
         "express-validation": "^4.1.0",
         "luxon": "^2.4.0",
         "node-thermal-printer": "^4.1.2",
+        "sweetalert2": "^11.4.20",
         "vue": "^3.2.37"
     },
     "devDependencies": {
@@ -57,7 +58,7 @@
         "@vue/test-utils": "^2.0.2",
         "autoprefixer": "^10.4.7",
         "cross-env": "^7.0.3",
-        "electron": "19.0.7",
+        "electron": "^19.0.8",
         "electron-builder": "^23.1.0",
         "electron-devtools-installer": "^3.2.0",
         "eslint": "^8.19.0",

@@ -1,8 +1,11 @@
+import type { BrowserWindow } from 'electron'
 import { app } from 'electron'
 import './security-restrictions'
 import { restoreOrCreateWindow } from '/@/mainWindow'
 import { createTray } from '/@/createTray'
 import { startServer } from '/@/server'
+
+let mainWindow: BrowserWindow | null = null
 
 /**
  * Prevent multiple instances
@@ -39,12 +42,12 @@ app.on('activate', restoreOrCreateWindow)
  * Create app window when background process will be ready
  */
 app.whenReady()
-    .then(() => {
+    .then(async () => {
         startServer()
 
-        createTray()
+        mainWindow = await restoreOrCreateWindow()
 
-        restoreOrCreateWindow()
+        createTray(mainWindow)
     })
     .catch((e) => console.error('Failed create window:', e))
 
@@ -73,3 +76,5 @@ if (import.meta.env.PROD) {
         .then(({ autoUpdater }) => autoUpdater.checkForUpdatesAndNotify())
         .catch((e) => console.error('Failed check updates:', e))
 }
+
+import './createIpc'

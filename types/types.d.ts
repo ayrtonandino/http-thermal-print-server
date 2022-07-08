@@ -15,6 +15,7 @@ declare namespace App {
     }
 
     export interface Api {
+        closeWindow: () => void
         getCoreData: () => App.Config
         setCoreData: (value: object) => void
         getConfigValue: (key: string) => string | number

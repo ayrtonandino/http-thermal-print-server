@@ -1,6 +1,8 @@
 <script lang="ts" setup>
     import { ref, onMounted } from 'vue'
+    import navBar from '/@/components/navBar.vue'
     import defaultConfig from '/@/components/defaultConfig.vue'
+    import TestConnection from '/@/components/testConnection.vue'
 
     // eslint-disable-next-line no-undef
     const defaultData = ref<App.Config>({
@@ -41,9 +43,11 @@
 </script>
 
 <template>
+    <nav-bar />
+
     <div class="my-3 mx-4">
         <div class="flex flex-wrap -mx-4">
-            <div class="w-1/2 px-4">
+            <div class="w-1/2 px-4 space-y-3">
                 <div class="shadow overflow-hidden sm:rounded-md">
                     <div class="px-4 py-5 bg-white sm:p-6">
                         <div class="grid grid-cols-6 gap-6">
@@ -87,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between px-4 py-3 bg-gray-50 sm:px-6">
+                    <div class="flex items-center justify-between px-4 py-3 border-t bg-gray-100 sm:px-6">
                         <button
                             type="button"
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -107,8 +111,10 @@
                 </div>
             </div>
 
-            <div class="w-1/2 px-4">
+            <div class="w-1/2 px-4 space-y-3">
                 <default-config :printer-url="defaultData?.printerUrl" :printer-port="defaultData?.printerPort" :printer-model="defaultData?.printerModel" />
+
+                <test-connection />
             </div>
         </div>
     </div>

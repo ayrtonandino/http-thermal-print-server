@@ -26,38 +26,32 @@ interface TicketData {
 
 const printValidation = {
     body: Joi.object({
-        model: Joi.string().valid('EPSON', 'STAR'),
-        printerUrl: Joi.string().uri().required(),
-        printerPort: Joi.number().port().required(),
+        id: Joi.number().required(),
+        fecha: Joi.string().isoDate().required(),
+        fechaCambio: Joi.string().isoDate().required(),
 
-        data: Joi.object({
-            id: Joi.number().required(),
-            fecha: Joi.string().isoDate().required(),
-            fechaCambio: Joi.string().isoDate().required(),
-
-            sucursal: Joi.object({
-                nombre: Joi.string().required(),
-                domicilio: Joi.string().required(),
-            }).required(),
-
-            cliente: Joi.object({
-                dni: Joi.any().required(),
-                apellido: Joi.string().required(),
-                nombre: Joi.string().required(),
-            }).required(),
-
-            articulos: Joi.array()
-                .items(
-                    Joi.object({
-                        codigo: Joi.string().required(),
-                        producto: Joi.string().required(),
-                        color: Joi.string().allow('', null),
-                        talle: Joi.string().allow('', null),
-                        cantidad: Joi.number().required(),
-                    })
-                )
-                .required(),
+        sucursal: Joi.object({
+            nombre: Joi.string().required(),
+            domicilio: Joi.string().required(),
         }).required(),
+
+        cliente: Joi.object({
+            dni: Joi.any().required(),
+            apellido: Joi.string().required(),
+            nombre: Joi.string().required(),
+        }).required(),
+
+        articulos: Joi.array()
+            .items(
+                Joi.object({
+                    codigo: Joi.string().required(),
+                    producto: Joi.string().required(),
+                    color: Joi.string().allow('', null),
+                    talle: Joi.string().allow('', null),
+                    cantidad: Joi.number().required(),
+                })
+            )
+            .required(),
     }),
 }
 

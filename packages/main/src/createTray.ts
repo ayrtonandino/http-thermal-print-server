@@ -1,13 +1,19 @@
+import type { BrowserWindow } from 'electron'
 import { app, Tray, Menu } from 'electron'
 import path from 'path'
 
-export const createTray = () => {
-    const icon = path.join(__dirname, '../../renderer/assets/favicon.ico')
+export const createTray = (mainWindow: BrowserWindow) => {
+    const icon = path.join(__dirname, '../../renderer/src/assets/favicon.ico')
 
     const tray = new Tray(icon)
 
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Configurar' },
+        {
+            label: 'Configurar',
+            click: function () {
+                mainWindow.show()
+            },
+        },
         {
             label: 'Cerrar',
             click: function () {
@@ -16,7 +22,11 @@ export const createTray = () => {
         },
     ])
 
-    tray.setToolTip('HTTP Thermal Print Server')
+    tray.on('double-click', function () {
+        mainWindow.show()
+    })
+
+    tray.setToolTip('Andromeda HTTP Thermal Print Server')
 
     tray.setContextMenu(contextMenu)
 

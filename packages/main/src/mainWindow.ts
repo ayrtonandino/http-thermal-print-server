@@ -1,10 +1,15 @@
+import type { Event } from 'electron'
 import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { URL } from 'url'
 
 async function createWindow() {
     const browserWindow = new BrowserWindow({
-        show: false, // Use 'ready-to-show' event to show window
+        show: false,
+        titleBarStyle: 'hidden',
+        width: 900,
+        height: 493,
+        resizable: false,
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: true,
@@ -20,13 +25,24 @@ async function createWindow() {
      * @see https://github.com/electron/electron/issues/25012
      */
     browserWindow.on('ready-to-show', () => {
-        browserWindow?.show()
-
         if (import.meta.env.DEV) {
+            browserWindow?.show()
+
             browserWindow?.webContents.openDevTools()
         }
     })
 
+    browserWindow.on('minimize', function (event: Event) {
+        event.preventDefault()
+
+        browserWindow.setSkipTaskbar(true)
+    })
+
+    browserWindow.on('restore', function (event: Event) {
+        event.preventDefault()
+
+        browserWindow.setSkipTaskbar(false)
+    })
     /**
      * URL for main window.
      * Vite dev server for development.
@@ -57,4 +73,6 @@ export async function restoreOrCreateWindow() {
     }
 
     window.focus()
+
+    return window
 }
