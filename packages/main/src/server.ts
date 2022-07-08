@@ -68,7 +68,7 @@ app.post('/print', validate(printValidation, { keyByField: true }, {}), async (r
     try {
         console.info('Create ticket')
 
-        createTicket(printer, request.body.data)
+        createTicket(printer, request.body)
 
         await printer.execute()
 
