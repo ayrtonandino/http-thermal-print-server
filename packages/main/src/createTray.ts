@@ -1,10 +1,8 @@
 import type { BrowserWindow } from 'electron'
 import { Tray, Menu } from 'electron'
-import path from 'path'
+import icon from './getTrayIcon'
 
 export const createTray = (mainWindow: BrowserWindow) => {
-    const icon = path.join(__dirname, '../../renderer/src/assets/favicon.ico')
-
     const tray = new Tray(icon)
 
     const contextMenu = Menu.buildFromTemplate([

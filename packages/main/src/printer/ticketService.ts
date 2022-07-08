@@ -61,7 +61,7 @@ function createTicket(printer: printerType, data: TicketData): void {
     printer.alignCenter()
     printer.bold(true)
     printer.println(String('ticket de cambio').toUpperCase())
-    printer.println(String('conservar ticket para cambio').toUpperCase())
+    printer.println(String('conservar para cambio').toUpperCase())
     printer.bold(false)
     printer.alignLeft()
 
@@ -115,9 +115,11 @@ function createTicket(printer: printerType, data: TicketData): void {
     printer.alignCenter()
     printer.bold(true)
     printer.println(String('ticket de cambio').toUpperCase())
-    printer.println(String('conservar ticket para cambio').toUpperCase())
+    printer.println(String('conservar para cambio').toUpperCase())
     printer.bold(false)
     printer.alignLeft()
+
+    printer.drawLine()
 
     printer.cut()
 }
