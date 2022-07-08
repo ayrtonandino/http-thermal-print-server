@@ -4,6 +4,8 @@
     function closeWindow() {
         window.api.closeWindow()
     }
+
+    const appVersion = import.meta.env.VITE_APP_VERSION || 'DEVELOPMENT'
 </script>
 
 <template>
@@ -13,7 +15,7 @@
                 <div class="flex items-center">
                     <img :src="favicon" class="mr-3 h-6 w-6" name="ANDROMEDA" alt="ANDROMEDA" />
 
-                    <h6 class="font-semibold text-white">HTTP Thermal Print Server</h6>
+                    <h6 class="font-semibold text-white">HTTP Thermal Print Server - {{ appVersion }}</h6>
                 </div>
 
                 <button type="button" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="closeWindow">

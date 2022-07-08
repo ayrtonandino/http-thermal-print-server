@@ -1,5 +1,5 @@
 import type { BrowserWindow } from 'electron'
-import { app, Tray, Menu } from 'electron'
+import { Tray, Menu } from 'electron'
 import path from 'path'
 
 export const createTray = (mainWindow: BrowserWindow) => {
@@ -9,16 +9,20 @@ export const createTray = (mainWindow: BrowserWindow) => {
 
     const contextMenu = Menu.buildFromTemplate([
         {
+            label: import.meta.env.VITE_APP_VERSION || 'DEVELOPMENT',
+            role: 'about',
+        },
+        { type: 'separator' },
+        {
             label: 'Configurar',
             click: function () {
                 mainWindow.show()
             },
         },
+        { type: 'separator' },
         {
-            label: 'Cerrar',
-            click: function () {
-                app.quit()
-            },
+            label: 'Close',
+            role: 'quit',
         },
     ])
 

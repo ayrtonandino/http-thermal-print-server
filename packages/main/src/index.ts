@@ -24,6 +24,10 @@ app.on('second-instance', restoreOrCreateWindow)
  */
 app.disableHardwareAcceleration()
 
+app.setLoginItemSettings({
+    openAtLogin: true,
+})
+
 /**
  * Shout down background process if all windows was closed
  */
