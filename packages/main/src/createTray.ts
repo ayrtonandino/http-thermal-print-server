@@ -12,7 +12,7 @@ export const createTray = (mainWindow: BrowserWindow) => {
         },
         { type: 'separator' },
         {
-            label: 'Configurar',
+            label: 'Config',
             click: function () {
                 mainWindow.show()
             },
