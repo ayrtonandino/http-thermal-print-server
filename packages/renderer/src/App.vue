@@ -1,51 +1,121 @@
 <script lang="ts" setup>
-    import ReactiveCounter from '/@/components/ReactiveCounter.vue'
-    import ReactiveHash from '/@/components/ReactiveHash.vue'
-    import ElectronVersions from '/@/components/ElectronVersions.vue'
+    import { ref, onMounted } from 'vue'
+    import navBar from '/@/components/navBar.vue'
+    import defaultConfig from '/@/components/defaultConfig.vue'
+    import TestConnection from '/@/components/testConnection.vue'
+
+    // eslint-disable-next-line no-undef
+    const defaultData = ref<App.Config>({
+        printerUrl: '',
+        printerPort: '',
+        printerModel: '',
+    })
+
+    const printerUrl = ref('')
+
+    const printerPort = ref('')
+
+    const printerModel = ref('')
+
+    onMounted(() => {
+        getData()
+    })
+
+    function submit() {
+        window.api.setCoreData({
+            printerUrl: printerUrl.value,
+            printerPort: printerPort.value,
+            printerModel: printerModel.value,
+        })
+
+        getData()
+    }
+
+    function getData() {
+        const data = window.api.getCoreData()
+
+        defaultData.value = data
+
+        printerUrl.value = data.printerUrl
+        printerPort.value = data.printerPort
+        printerModel.value = data.printerModel
+    }
 </script>
 
 <template>
-    <img alt="Vue logo" src="../assets/logo.svg" width="150" />
+    <nav-bar />
 
-    <p>
-        For a guide and recipes on how to configure / customize this project,<br />
-        check out the
-        <a href="https://github.com/cawa-93/vite-electron-builder" target="_blank">vite-electron-builder documentation</a>.
-    </p>
+    <div class="my-3 mx-4">
+        <div class="-mx-4 flex flex-wrap">
+            <div class="w-1/2 space-y-3 px-4">
+                <div class="overflow-hidden shadow sm:rounded-md">
+                    <div class="bg-white px-4 py-5 sm:p-6">
+                        <div class="grid grid-cols-6 gap-6">
+                            <div class="col-span-6">
+                                <label for="printer-url" class="block text-sm font-medium text-gray-700">Printer URL</label>
 
-    <fieldset>
-        <legend>Test Vue Reactivity</legend>
-        <reactive-counter />
-    </fieldset>
+                                <input
+                                    id="printer-url"
+                                    v-model="printerUrl"
+                                    type="text"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                />
+                            </div>
 
-    <fieldset>
-        <legend>Test Node.js API</legend>
-        <reactive-hash />
-    </fieldset>
+                            <div class="col-span-6">
+                                <label for="printer-port" class="block text-sm font-medium text-gray-700">Printer Port</label>
 
-    <fieldset>
-        <legend>Environment</legend>
-        <electron-versions />
-    </fieldset>
+                                <input
+                                    id="printer-port"
+                                    v-model="printerPort"
+                                    type="number"
+                                    min="0"
+                                    max="65535"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                />
+                            </div>
 
-    <p>
-        Edit
-        <code>packages/renderer/src/App.vue</code> to test hot module replacement.
-    </p>
+                            <div class="col-span-6">
+                                <label for="printer-model" class="block text-sm font-medium text-gray-700">Printer Model</label>
+
+                                <select
+                                    id="printer-model"
+                                    v-model="printerModel"
+                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                >
+                                    <option value="EPSON">EPSON</option>
+
+                                    <option value="STAR">STAR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-t bg-gray-100 px-4 py-3 sm:px-6">
+                        <button
+                            type="button"
+                            class="inline-flex justify-center rounded-md border border-transparent bg-red-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                            @click="getData"
+                        >
+                            Reload
+                        </button>
+
+                        <button
+                            type="button"
+                            class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            @click="submit"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 space-y-3 px-4">
+                <default-config :printer-url="defaultData?.printerUrl" :printer-port="defaultData?.printerPort" :printer-model="defaultData?.printerModel" />
+
+                <test-connection />
+            </div>
+        </div>
+    </div>
 </template>
-
-<style>
-    #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin: 60px auto;
-        max-width: 700px;
-    }
-    fieldset {
-        margin: 2rem;
-        padding: 1rem;
-    }
-</style>
