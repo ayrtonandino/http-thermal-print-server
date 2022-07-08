@@ -1,6 +1,7 @@
 {
-    "name": "vite-electron-builder",
-    "description": "Secure boilerplate for Electron app based on Vite",
+    "name": "http-thermal-print-server",
+    "productName": "HTTP Thermal Print Server",
+    "description": "HTTP Service for printing on thermal printer from browser",
     "private": true,
     "engines": {
         "node": ">=v16.13",
@@ -74,7 +75,7 @@
         "tailwindcss": "^3.1.5",
         "typescript": "^4.7.4",
         "unplugin-auto-expose": "^0.0.1",
-        "vite": "^2.9.13",
+        "vite": "^2.9.14",
         "vitest": "^0.17.1",
         "vue-tsc": "^0.38.3"
     }
