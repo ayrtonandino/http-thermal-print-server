@@ -9,11 +9,11 @@
 <template>
     <nav class="bg-gray-800">
         <header class="mx-auto px-4">
-            <div class="flex items-center justify-between h-10">
+            <div class="flex h-10 items-center justify-between">
                 <div class="flex items-center">
-                    <img :src="favicon" class="w-6 h-6 mr-3" name="ANDROMEDA" alt="ANDROMEDA" />
+                    <img :src="favicon" class="mr-3 h-6 w-6" name="ANDROMEDA" alt="ANDROMEDA" />
 
-                    <h6 class="text-white font-semibold">HTTP Thermal Print Server</h6>
+                    <h6 class="font-semibold text-white">HTTP Thermal Print Server</h6>
                 </div>
 
                 <button type="button" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="closeWindow">

@@ -23,11 +23,11 @@
 </script>
 
 <template>
-    <div class="shadow overflow-hidden sm:rounded-md">
-        <div class="flex items-center justify-center px-4 py-3 bg-gray-50 sm:px-6">
+    <div class="overflow-hidden shadow sm:rounded-md">
+        <div class="flex items-center justify-center bg-gray-50 px-4 py-3 sm:px-6">
             <button
                 type="button"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 @click="testConnection"
             >
                 Test Connection
