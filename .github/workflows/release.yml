@@ -33,11 +33,7 @@ jobs:
 
             - uses: actions/setup-node@v3
               with:
-                  node-version: 18
-
-            - uses: pnpm/action-setup@v2.0.1
-              with:
-                  version: 7
+                  node-version: 14
 
             - name: Get last git tag
               id: tag
@@ -95,15 +91,11 @@ jobs:
 
             - uses: actions/setup-node@v3
               with:
-                  node-version: 18 # Need for pnpm >=7.7
+                  node-version: 16 # Need for npm >=7.7
                   cache: 'npm'
 
-            - uses: pnpm/action-setup@v2.0.1
-              with:
-                  version: 7
-
             - name: Install dependencies
-              run: pnpm install
+              run: npm ci
 
             # The easiest way to transfer release notes to a compiled application is create `release-notes.md` in the build resources.
             # See https://github.com/electron-userland/electron-builder/issues/1511#issuecomment-310160119

@@ -16,7 +16,7 @@
 
     "packageRules": [
         {
-            "packageNames": ["node", "pnpm"],
+            "packageNames": ["node", "npm"],
             "enabled": false
         },
         {
