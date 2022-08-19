@@ -36,6 +36,7 @@ function createTag(printer: printerType, data: TagData): void {
 
     printer.println(descripcion)
 
+    printer.setTypeFontA()
     printer.drawLine()
 
     printer.cut()
