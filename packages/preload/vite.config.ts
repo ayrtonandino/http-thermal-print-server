@@ -1,29 +1,19 @@
-import { node } from '../../.electron-vendors.cache.json'
-import { join } from 'path'
+import { chrome } from '../../.electron-vendors.cache.json'
+import type { UserConfig } from 'vite'
 
 const PACKAGE_ROOT = __dirname
 
-/**
- * @type {import('vite').UserConfig}
- * @see https://vitejs.dev/config/
- */
-const config = {
+const config: UserConfig = {
     mode: process.env.MODE,
 
     root: PACKAGE_ROOT,
 
     envDir: process.cwd(),
 
-    resolve: {
-        alias: {
-            '/@/': join(PACKAGE_ROOT, 'src') + '/',
-        },
-    },
-    
     build: {
         ssr: true,
         sourcemap: 'inline',
-        target: `node${node}`,
+        target: `chrome${chrome}`,
         outDir: 'dist',
         assetsDir: '.',
         minify: process.env.MODE !== 'development',

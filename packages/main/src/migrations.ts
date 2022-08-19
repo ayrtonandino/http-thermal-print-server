@@ -1,4 +1,4 @@
-const modules = import.meta.globEager('./migrations/*.ts')
+const modules = import.meta.glob('./migrations/*.ts', { eager: true })
 
 const migrations = {}
 

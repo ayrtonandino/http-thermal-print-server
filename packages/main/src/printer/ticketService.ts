@@ -24,7 +24,7 @@ interface TicketData {
     }[]
 }
 
-const printValidation = {
+const ticketValidation = {
     body: Joi.object({
         id: Joi.number().required(),
         fecha: Joi.string().isoDate().required(),
@@ -124,4 +124,4 @@ function createTicket(printer: printerType, data: TicketData): void {
     printer.cut()
 }
 
-export { printValidation, createTicket }
+export { ticketValidation, createTicket }

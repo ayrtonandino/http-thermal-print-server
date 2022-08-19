@@ -3,14 +3,11 @@
 import { chrome } from '../../.electron-vendors.cache.json'
 import { join } from 'path'
 import vue from '@vitejs/plugin-vue'
+import type { UserConfig } from 'vite'
 
 const PACKAGE_ROOT = __dirname
 
-/**
- * @type {import('vite').UserConfig}
- * @see https://vitejs.dev/config/
- */
-const config = {
+const config: UserConfig = {
     mode: process.env.MODE,
 
     root: PACKAGE_ROOT,
@@ -41,13 +38,7 @@ const config = {
         reportCompressedSize: false,
     },
 
-    test: {
-        environment: 'happy-dom',
-    },
-
-    plugins: [
-        vue(),
-    ],
+    plugins: [vue()],
 }
 
 export default config

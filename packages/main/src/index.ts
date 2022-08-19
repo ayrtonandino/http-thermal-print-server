@@ -63,8 +63,8 @@ app.whenReady()
 if (import.meta.env.DEV) {
     app.whenReady()
         .then(() => import('electron-devtools-installer'))
-        .then(({ default: installExtension, VUEJS3_DEVTOOLS }) =>
-            installExtension(VUEJS3_DEVTOOLS, {
+        .then(({ default: installExtension, VUEJS_DEVTOOLS }) =>
+            installExtension(VUEJS_DEVTOOLS, {
                 loadExtensionOptions: {
                     allowFileAccess: true,
                 },

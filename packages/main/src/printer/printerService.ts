@@ -1,4 +1,5 @@
 import { printer as ThermalPrinter, types as Types } from 'node-thermal-printer'
+import store from './../createStore'
 
 function newPrinter(url = 'tcp://127.0.0.1', port: string | number = 9000, model = 'EPSON') {
     return new ThermalPrinter({
@@ -7,4 +8,8 @@ function newPrinter(url = 'tcp://127.0.0.1', port: string | number = 9000, model
     })
 }
 
-export { newPrinter }
+function getPrinter() {
+    return newPrinter(store.get('printerUrl'), store.get('printerPort'), store.get('printerModel'))
+}
+
+export { newPrinter, getPrinter }
