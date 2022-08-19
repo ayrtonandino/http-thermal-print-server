@@ -26,7 +26,10 @@ function createTag(printer: printerType, data: TagData): void {
     printer.drawLine()
     printer.newLine()
 
-    printer.code128(codigo)
+    printer.code128(codigo, {
+        height: 81,
+        width: 'SMALL',
+    })
 
     printer.newLine()
 
