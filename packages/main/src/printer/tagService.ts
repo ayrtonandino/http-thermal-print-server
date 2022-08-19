@@ -9,40 +9,46 @@ interface TagData {
 }
 
 const tagValidation = {
-    body: Joi.object({
-        codigo: Joi.string().required(),
-        producto: Joi.string().required(),
-        color: Joi.string().allow('', null),
-        talle: Joi.string().allow('', null),
-    }),
+    body: Joi.array()
+        .items(
+            Joi.object({
+                codigo: Joi.string().required(),
+                producto: Joi.string().required(),
+                color: Joi.string().allow('', null),
+                talle: Joi.string().allow('', null),
+            })
+        )
+        .required(),
 }
 
-function createTag(printer: printerType, data: TagData): void {
-    const codigo = String(data.codigo).toUpperCase()
-    const descripcion = String(`${data.producto} ${data.color || ''} ${data.talle || ''}`).toUpperCase()
+function createTag(printer: printerType, data: TagData[]): void {
+    data.forEach((tag) => {
+        const codigo = String(tag.codigo).toUpperCase()
+        const descripcion = String(`${tag.producto} ${tag.color || ''} ${tag.talle || ''}`).toUpperCase()
 
-    printer.alignCenter()
+        printer.alignCenter()
 
-    printer.drawLine()
-    printer.newLine()
+        printer.drawLine()
+        printer.newLine()
 
-    printer.code128(codigo, {
-        height: 81,
-        width: 'SMALL',
+        printer.code128(codigo, {
+            height: 81,
+            width: 'SMALL',
+        })
+
+        printer.newLine()
+
+        printer.println(codigo)
+
+        printer.setTypeFontB()
+
+        printer.println(descripcion)
+
+        printer.setTypeFontA()
+        printer.drawLine()
+
+        printer.cut()
     })
-
-    printer.newLine()
-
-    printer.println(codigo)
-
-    printer.setTypeFontB()
-
-    printer.println(descripcion)
-
-    printer.setTypeFontA()
-    printer.drawLine()
-
-    printer.cut()
 }
 
 export { tagValidation, createTag }
