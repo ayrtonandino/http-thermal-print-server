@@ -18,17 +18,23 @@ const tagValidation = {
 }
 
 function createTag(printer: printerType, data: TagData): void {
-    printer.drawLine()
+    const codigo = String(data.codigo).toUpperCase()
+    const descripcion = String(`${data.producto} ${data.color || ''} ${data.talle || ''}`).toUpperCase()
 
     printer.alignCenter()
-    printer.code128('Code128')
 
-    printer.setTextQuadArea()
-    printer.println(String(data.codigo).toUpperCase())
-    printer.setTextNormal()
+    printer.drawLine()
     printer.newLine()
-    printer.println(String(data.codigo).toUpperCase())
-    printer.println(String(data.producto).toUpperCase())
+
+    printer.code128(codigo)
+
+    printer.newLine()
+
+    printer.println(codigo)
+
+    printer.setTypeFontB()
+
+    printer.println(descripcion)
 
     printer.drawLine()
 
