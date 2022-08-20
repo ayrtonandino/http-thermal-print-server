@@ -1,21 +1,22 @@
 import { node } from '../../.electron-vendors.cache.json'
 import { join } from 'path'
+import type { UserConfig } from 'vite'
 
 const PACKAGE_ROOT = __dirname
 
-/**
- * @type {import('vite').UserConfig}
- * @see https://vitejs.dev/config/
- */
-const config = {
+const config: UserConfig = {
     mode: process.env.MODE,
+
     root: PACKAGE_ROOT,
+
     envDir: process.cwd(),
+
     resolve: {
         alias: {
             '/@/': join(PACKAGE_ROOT, 'src') + '/',
         },
     },
+
     build: {
         ssr: true,
         sourcemap: 'inline',
@@ -33,7 +34,7 @@ const config = {
             },
         },
         emptyOutDir: true,
-        brotliSize: false,
+        reportCompressedSize: false,
     },
 }
 

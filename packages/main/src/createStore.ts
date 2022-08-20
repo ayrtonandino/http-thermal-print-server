@@ -1,6 +1,5 @@
 import type { Schema } from 'electron-store'
 import ElectronStore from 'electron-store'
-import migrations from './migrations'
 
 const schema: Schema<App.Config> = {
     printerUrl: {
@@ -23,5 +22,11 @@ const schema: Schema<App.Config> = {
 
 export default new ElectronStore({
     schema,
-    migrations,
+    migrations: {
+        '0.1.0': (store: App.ElectronStore): void => {
+            store.set('printerUrl', 'tcp://127.0.0.1')
+            store.set('printerPort', 9100)
+            store.set('printerModel', 'EPSON')
+        },
+    },
 })

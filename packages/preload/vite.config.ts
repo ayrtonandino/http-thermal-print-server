@@ -1,16 +1,15 @@
 import { chrome } from '../../.electron-vendors.cache.json'
-import { preload } from 'unplugin-auto-expose'
+import type { UserConfig } from 'vite'
 
 const PACKAGE_ROOT = __dirname
 
-/**
- * @type {import('vite').UserConfig}
- * @see https://vitejs.dev/config/
- */
-const config = {
+const config: UserConfig = {
     mode: process.env.MODE,
+
     root: PACKAGE_ROOT,
+
     envDir: process.cwd(),
+
     build: {
         ssr: true,
         sourcemap: 'inline',
@@ -28,9 +27,8 @@ const config = {
             },
         },
         emptyOutDir: true,
-        brotliSize: false,
+        reportCompressedSize: false,
     },
-    plugins: [preload.vite()],
 }
 
 export default config

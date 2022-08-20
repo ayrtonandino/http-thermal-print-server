@@ -47,7 +47,7 @@ const setupMainPackageWatcher = ({ config: { server } }) => {
     {
         const protocol = server.https ? 'https:' : 'http:'
         const host = server.host || 'localhost'
-        const port = server.port // Vite searches for and occupies the first free port: 3000, 3001, 3002 and so on
+        const port = server.port // Vite searches for and occupies the first free port: 5173
         const path = '/'
         process.env.VITE_DEV_SERVER_URL = `${protocol}//${host}:${port}${path}`
     }
@@ -61,7 +61,7 @@ const setupMainPackageWatcher = ({ config: { server } }) => {
 
     return getWatcher({
         name: 'reload-app-on-main-package-change',
-        configFile: 'packages/main/vite.config.js',
+        configFile: 'packages/main/vite.config.ts',
         writeBundle() {
             if (spawnProcess !== null) {
                 spawnProcess.off('exit', process.exit)
@@ -93,7 +93,7 @@ const setupMainPackageWatcher = ({ config: { server } }) => {
 const setupPreloadPackageWatcher = ({ ws }) =>
     getWatcher({
         name: 'reload-page-on-preload-package-change',
-        configFile: 'packages/preload/vite.config.js',
+        configFile: 'packages/preload/vite.config.ts',
         writeBundle() {
             ws.send({
                 type: 'full-reload',
@@ -105,7 +105,7 @@ const setupPreloadPackageWatcher = ({ ws }) =>
     try {
         const viteDevServer = await createServer({
             ...sharedConfig,
-            configFile: 'packages/renderer/vite.config.js',
+            configFile: 'packages/renderer/vite.config.ts',
         })
 
         await viteDevServer.listen()
