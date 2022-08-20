@@ -1,15 +1,7 @@
 if (process.env.VITE_APP_VERSION === undefined) {
     const now = new Date()
 
-    const year = String(now.getUTCFullYear() - 2000)
-
-    const month = String(now.getUTCMonth() + 1).padStart(2, '0')
-
-    const day = String(now.getUTCDate()).padStart(2, '0')
-
-    const stamp = String(now.getUTCHours() * 60 + now.getUTCMinutes())
-
-    process.env.VITE_APP_VERSION = `${year}${month}.${day}-${stamp}`
+    process.env.VITE_APP_VERSION = `${now.getUTCFullYear() - 2000}.${now.getUTCMonth() + 1}.${now.getUTCDate()}-${now.getUTCHours() * 60 + now.getUTCMinutes()}`
 }
 
 /**
