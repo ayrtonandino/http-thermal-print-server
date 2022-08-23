@@ -13,39 +13,10 @@ const app = express()
 app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(bodyParser.json())
 
 app.get('/status', async (request, response) => {
-    try {
-        console.log('Printer test connection')
-
-        const printer = getPrinter()
-
-        const isConnected = await printer.isPrinterConnected()
-
-        if (!isConnected) {
-            return response.status(400).json({
-                error: 'Printer not connected',
-                printerData: {
-                    printerUrl: store.get('printerUrl'),
-                    printerPort: store.get('printerPort'),
-                    printerModel: store.get('printerModel'),
-                },
-            })
-        }
-    } catch (error: any) {
-        console.error('Print connection error:', error)
-
-        return response.status(500).json({
-            status: 'error',
-            message: error.message,
-        })
-    }
-
-    response.json({ status: 'Server Online' })
-})
-
-app.get('/print', async (request, response) => {
     try {
         console.log('Printer test connection')
 
