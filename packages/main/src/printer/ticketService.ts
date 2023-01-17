@@ -106,7 +106,15 @@ function createTicket(printer: printerType, data: TicketData): void {
     }
 
     printer.alignCenter()
-    printer.printQR(JSON.stringify(data))
+    printer.printQR(
+        JSON.stringify({
+            id: data.id,
+            fecha: data.fecha,
+            fechaCambio: data.fechaCambio,
+            cliente: data.cliente,
+            sucursal: data.sucursal,
+        })
+    )
     printer.drawLine()
 
     printer.println(String('comprobante no valido como factura').toUpperCase())
