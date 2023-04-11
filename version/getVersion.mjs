@@ -5,5 +5,7 @@
  * @return {string}
  */
 export function getVersion() {
-    return process.env.npm_package_version
+    const now = new Date()
+
+    return `${now.getUTCFullYear() - 2000}.${now.getUTCMonth() + 1}.${now.getUTCDate()}-${now.getUTCHours() * 60 + now.getUTCMinutes()}`
 }
