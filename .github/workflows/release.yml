@@ -26,6 +26,8 @@ jobs:
         #    os: [ macos-latest, ubuntu-latest, windows-latest ]
 
         runs-on: ${{ matrix.os }}
+        outputs:
+            release-note: ${{ steps.release-note.outputs.release-note }}
 
         steps:
             - uses: actions/checkout@v3
@@ -38,6 +40,13 @@ jobs:
             - run: npm ci
               env:
                   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+
+            # The easiest way to transfer release notes to a compiled application is create `release-notes.md` in the build resources.
+            # See https://github.com/electron-userland/electron-builder/issues/1511#issuecomment-310160119
+            - name: Prepare release notes
+              env:
+                  RELEASE_NOTE: ${{ needs.draft.outputs.release-note }}
+              run: echo "$RELEASE_NOTE" >> ./buildResources/release-notes.md
 
             - run: npm run build
 
