@@ -39,6 +39,7 @@ app.on('web-contents-created', (_, contents) => {
      */
     contents.on('will-navigate', (event, url) => {
         const { origin } = new URL(url)
+
         if (ALLOWED_ORIGINS_AND_PERMISSIONS.has(origin)) {
             return
         }
@@ -101,6 +102,7 @@ app.on('web-contents-created', (_, contents) => {
      */
     contents.on('will-attach-webview', (event, webPreferences, params) => {
         const { origin } = new URL(params.src)
+
         if (!ALLOWED_ORIGINS_AND_PERMISSIONS.has(origin)) {
             if (import.meta.env.DEV) {
                 console.warn(`A webview tried to attach ${params.src}, but was blocked.`)
