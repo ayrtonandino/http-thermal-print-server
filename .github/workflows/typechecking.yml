@@ -1,21 +1,9 @@
 name: Typechecking
-on:
-    push:
-        branches:
-            - main
-        paths:
-            - '**.ts'
-            - '**.vue'
-            - '**/tsconfig.json'
-            - 'package-lock.json'
-            - '.github/workflows/typechecking.yml'
-    pull_request:
-        paths:
-            - '**.ts'
-            - '**.vue'
-            - '**/tsconfig.json'
-            - 'package-lock.json'
-            - '.github/workflows/typechecking.yml'
+on: [workflow_call]
+
+concurrency:
+    group: typechecking-${{ github.ref }}
+    cancel-in-progress: true
 
 defaults:
     run:
@@ -32,8 +20,8 @@ jobs:
                   node-version: 18
                   cache: 'npm'
 
-            # TODO: Install not all dependencies, but only those required for this workflow
-            - name: Install dependencies
-              run: npm ci
+            - run: npm ci
+              env:
+                  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
-            - run: npm run typecheck
+            - run: npm run typecheck --if-present

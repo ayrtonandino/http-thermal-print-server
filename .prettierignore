@@ -1,11 +1,10 @@
-.DS_Store
-/node_modules
-/.idea
-/dist
-npm-debug.log
-yarn-error.log
-*.code-workspace
+**/node_modules
+**/dist
+**/*.svg
 
-package.json=
-pnpm-lock.yaml
-README.md
+package.json
+package-lock.json
+.electron-vendors.cache.json
+
+.github
+.idea

@@ -1,15 +1,16 @@
-import { node } from '../../.electron-vendors.cache.json'
-import { join } from 'path'
 import type { UserConfig } from 'vite'
+import { node } from '../../.electron-vendors.cache.json'
+import { join } from 'node:path'
+import { injectAppVersion } from '../../version/inject-app-version-plugin.mjs'
 
 const PACKAGE_ROOT = __dirname
+const PROJECT_ROOT = join(PACKAGE_ROOT, '../..')
 
 const config: UserConfig = {
     mode: process.env.MODE,
 
     root: PACKAGE_ROOT,
-
-    envDir: process.cwd(),
+    envDir: PROJECT_ROOT,
 
     resolve: {
         alias: {
@@ -36,6 +37,8 @@ const config: UserConfig = {
         emptyOutDir: true,
         reportCompressedSize: false,
     },
+
+    plugins: [injectAppVersion()],
 }
 
 export default config
