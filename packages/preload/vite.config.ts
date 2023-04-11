@@ -1,14 +1,18 @@
-import { chrome } from '../../.electron-vendors.cache.json'
 import type { UserConfig } from 'vite'
+import { chrome } from '../../.electron-vendors.cache.json'
+import { preload } from 'unplugin-auto-expose'
+import { join } from 'node:path'
+import { injectAppVersion } from '../../version/inject-app-version-plugin.mjs'
 
 const PACKAGE_ROOT = __dirname
+const PROJECT_ROOT = join(PACKAGE_ROOT, '../..')
 
 const config: UserConfig = {
     mode: process.env.MODE,
 
     root: PACKAGE_ROOT,
 
-    envDir: process.cwd(),
+    envDir: PROJECT_ROOT,
 
     build: {
         ssr: true,
@@ -29,6 +33,8 @@ const config: UserConfig = {
         emptyOutDir: true,
         reportCompressedSize: false,
     },
+
+    plugins: [preload.vite(), injectAppVersion()],
 }
 
 export default config

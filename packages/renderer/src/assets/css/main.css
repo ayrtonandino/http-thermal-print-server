@@ -1,0 +1,12 @@
+@import './base.css';
+
+/* sweetalert2 */
+@import '@sweetalert2/theme-wordpress-admin/wordpress-admin.min.css';
+
+header {
+    -webkit-app-region: drag;
+}
+
+header button {
+    -webkit-app-region: no-drag;
+}

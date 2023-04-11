@@ -8,11 +8,10 @@
         "strict": true,
         "isolatedModules": true,
         "allowSyntheticDefaultImports": true,
-
         "types": ["node"],
-
         "baseUrl": "."
     },
     "include": ["src/**/*.ts", "../../types/**/*.d.ts"],
     "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }
+  
