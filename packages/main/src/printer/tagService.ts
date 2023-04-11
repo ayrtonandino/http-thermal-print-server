@@ -11,7 +11,7 @@ interface TagData {
 const tagValidation = {
     body: Joi.array()
         .items(
-            Joi.object({
+            Joi.object<TagData>({
                 codigo: Joi.string().required(),
                 producto: Joi.string().required(),
                 color: Joi.string().allow('', null),
@@ -23,26 +23,26 @@ const tagValidation = {
 
 function createTag(printer: printerType, data: TagData[]): void {
     data.forEach((tag) => {
-        const codigo = String(tag.codigo).toUpperCase()
-        const descripcion = String(`${tag.producto} ${tag.color || ''} ${tag.talle || ''}`).toUpperCase()
+        const code = String(tag.codigo).toUpperCase()
+        const description = String(`${tag.producto} ${tag.color || ''} ${tag.talle || ''}`).toUpperCase()
 
         printer.alignCenter()
 
         printer.drawLine()
         printer.newLine()
 
-        printer.code128(codigo, {
+        printer.code128(code, {
             height: 81,
             width: 'SMALL',
         })
 
         printer.newLine()
 
-        printer.println(codigo)
+        printer.println(code)
 
         printer.setTypeFontB()
 
-        printer.println(descripcion)
+        printer.println(description)
 
         printer.setTypeFontA()
         printer.drawLine()
