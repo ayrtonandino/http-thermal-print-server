@@ -8,6 +8,7 @@
     },
     "main": "packages/main/dist/index.cjs",
     "scripts": {
+        "upd": "npm update",
         "dev": "node scripts/watch.mjs",
         "build": "npm run build:main && npm run build:preload && npm run build:renderer",
         "build:main": "cd ./packages/main && vite build",
@@ -19,7 +20,6 @@
         "test:main": "vitest run -r packages/main --passWithNoTests",
         "test:preload": "vitest run -r packages/preload --passWithNoTests",
         "test:renderer": "vitest run -r packages/renderer --passWithNoTests",
-        "watch": "node scripts/watch.mjs",
         "lint": "eslint . --ext js,mjs,cjs,ts,mts,cts,vue && prettier --write . --plugin=prettier-plugin-tailwindcss",
         "typecheck:main": "tsc --noEmit -p packages/main/tsconfig.json",
         "typecheck:preload": "tsc --noEmit -p packages/preload/tsconfig.json",
